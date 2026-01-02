@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config';
 
 const Library = () => {
     const [books, setBooks] = useState([]);
@@ -11,7 +12,7 @@ const Library = () => {
     }, []);
 
     const fetchBooks = async () => {
-        const res = await axios.get('http://localhost:5000/api/books');
+        const res = await axios.get('API_URL/api/books');
         setBooks(res.data);
     };
 
@@ -20,7 +21,7 @@ const Library = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        await axios.post('http://localhost:5000/api/upload', formData);
+        await axios.post('API_URL/api/upload', formData);
         fetchBooks(); // Refresh list
     };
 

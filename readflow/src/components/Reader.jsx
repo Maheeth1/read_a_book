@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import _ from 'lodash'; // Install lodash for throttling: npm install lodash
+import { API_URL } from '../config';
 
 const Reader = () => {
     const { id } = useParams();
@@ -14,7 +15,7 @@ const Reader = () => {
     // Fetch Book Data
     useEffect(() => {
         const loadBook = async () => {
-            const res = await axios.get(`http://localhost:5000/api/books/${id}`);
+            const res = await axios.get(`API_URL/api/books/${id}`);
             setBook(res.data);
             setSettings(prev => ({ ...prev, theme: res.data.themePreference || 'light' }));
             
@@ -30,7 +31,7 @@ const Reader = () => {
     // Save Progress (Throttled to run once every 1 sec)
     // We send the Index of the paragraph currently at the top of the viewport
     const saveProgress = useCallback(_.throttle(async (index) => {
-        await axios.put(`http://localhost:5000/api/books/${id}/progress`, {
+        await axios.put(`API_URL/api/books/${id}/progress`, {
             index: index,
             theme: settings.theme
         });
