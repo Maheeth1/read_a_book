@@ -21,3 +21,45 @@ body { margin: 0; font-family: 'Georgia', serif; transition: background 0.3s, co
 /* Controls */
 .controls { position: fixed; top: 0; left: 0; right: 0; padding: 10px; background: rgba(0,0,0,0.8); color: white; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
 .btn { margin: 0 5px; padding: 5px 10px; cursor: pointer; }
+
+
+/* --- MOBILE RESPONSIVENESS FIXES --- */
+
+@media (max-width: 768px) {
+  /* 1. Fix the Library Grid */
+  .library-grid {
+    grid-template-columns: 1fr; /* Force 1 column per row */
+    padding: 15px;              /* Reduce outer padding */
+    gap: 15px;
+  }
+
+  /* 2. Fix the Reader View Text */
+  .reader-container {
+    padding: 80px 20px 20px 20px; /* Top padding clears the fixed header */
+    width: auto;                  /* Let it fill the screen width */
+    max-width: 100%;
+  }
+
+  /* 3. Fix the Top Control Bar */
+  .controls {
+    flex-direction: column;       /* Stack items vertically */
+    gap: 10px;
+    padding: 15px;
+    height: auto;                 /* Let it grow tall if needed */
+  }
+
+  .controls > span {
+    /* Truncate long book titles on mobile so they don't break layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+    font-size: 0.9rem;
+  }
+
+  /* Make buttons easier to tap */
+  .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
