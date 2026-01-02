@@ -15,7 +15,7 @@ const Reader = () => {
     // Fetch Book Data
     useEffect(() => {
         const loadBook = async () => {
-            const res = await axios.get(`API_URL/api/books/${id}`);
+            const res = await axios.get(`${API_URL}/api/books/${id}`);
             setBook(res.data);
             setSettings(prev => ({ ...prev, theme: res.data.themePreference || 'light' }));
             
@@ -31,7 +31,7 @@ const Reader = () => {
     // Save Progress (Throttled to run once every 1 sec)
     // We send the Index of the paragraph currently at the top of the viewport
     const saveProgress = useCallback(_.throttle(async (index) => {
-        await axios.put(`API_URL/api/books/${id}/progress`, {
+        await axios.put(`${API_URL}/api/books/${id}/progress`, {
             index: index,
             theme: settings.theme
         });

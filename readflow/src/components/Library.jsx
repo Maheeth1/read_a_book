@@ -12,7 +12,7 @@ const Library = () => {
     }, []);
 
     const fetchBooks = async () => {
-        const res = await axios.get('API_URL/api/books');
+        const res = await axios.get(`${API_URL}/api/books`);
         setBooks(res.data);
     };
 
@@ -21,7 +21,7 @@ const Library = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        await axios.post('API_URL/api/upload', formData);
+        await axios.post(`${API_URL}/api/upload`, formData);
         fetchBooks(); // Refresh list
     };
 
