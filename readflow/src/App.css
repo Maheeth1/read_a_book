@@ -19,7 +19,64 @@ body { margin: 0; font-family: 'Georgia', serif; transition: background 0.3s, co
 .paragraph { margin-bottom: 1.5em; line-height: 1.6; }
 
 /* Controls */
-.controls { position: fixed; top: 0; left: 0; right: 0; padding: 10px; background: rgba(0,0,0,0.8); color: white; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
+/* --- CONTROLS BAR (Updated) --- */
+.controls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 1000;
+    
+    /* Animation Magic */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Logic to hide the bar */
+.controls.hidden {
+    transform: translateY(-100%); /* Moves it up out of view */
+}
+
+.controls.visible {
+    transform: translateY(0);
+}
+
+/* Fix title overlapping buttons on mobile */
+.book-title {
+    flex: 1; /* Takes up available space */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." if too long */
+    margin: 0 15px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* --- READER CONTAINER --- */
+.reader-container {
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 0 20px; /* Side padding only */
+    /* Note: Top padding is handled by the empty div spacer in JSX */
+}
+
+/* --- MOBILE SPECIFIC --- */
+@media (max-width: 600px) {
+    .controls {
+        padding: 0 10px;
+    }
+    .btn {
+        padding: 5px 8px; /* Smaller buttons on phone */
+        font-size: 12px;
+    }
+}
+
 .btn { margin: 0 5px; padding: 5px 10px; cursor: pointer; }
 
 
